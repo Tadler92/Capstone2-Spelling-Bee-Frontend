@@ -1,0 +1,8 @@
+.GuessedAnswer {
+  height: 40px;
+  border: solid 1px steelblue;
+}
+
+.GuessedAnswer-active {
+  border: solid 2px rgb(158, 156, 156);
+}

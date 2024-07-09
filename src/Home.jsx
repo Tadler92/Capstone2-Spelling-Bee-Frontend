@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import SpellWordForm from "./SpellWordForm";
+import GuessedAnswer from "./GuessedAnswer";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -19,6 +20,13 @@ const Home = () => {
         src="https://i.giphy.com/pBj0EoGSYjGms.gif"
         alt="Audrey II wants to eat." 
         /> */}
+
+        <GuessedAnswer guess='Hello' />
+        <GuessedAnswer guess='' />
+        <GuessedAnswer guess='' />
+        <GuessedAnswer guess='' />
+        <GuessedAnswer guess='' />
+        <GuessedAnswer guess='' />
       </div>
 
       <div>
