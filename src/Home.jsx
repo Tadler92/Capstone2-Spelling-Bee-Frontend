@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import SpellWordForm from "./SpellWordForm";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -26,9 +27,11 @@ const Home = () => {
         </audio>
       </div>
 
-      <div>
+      {/* <div>
         <button onClick={() => console.log(1+1)}>Submit</button>
-      </div>
+      </div> */}
+
+      <SpellWordForm />
       {/* <button onClick={() => navigate('order-summary', {replace: true})}>Place Order</button> */}
     </>
   )
