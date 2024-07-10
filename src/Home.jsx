@@ -2,16 +2,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import SpellWordForm from "./SpellWordForm";
 import GuessedAnswer from "./GuessedAnswer";
+import "./Home.css"
 
 const Home = () => {
   const navigate = useNavigate();
   const [count, setCount] = useState(0)
 
   return (
-    <>
-      <div>
+    <div className="Home">
+      {/* <div>
         <p>NavBar thing</p>
-      </div>
+      </div> */}
 
       <div>
         <p>Click to go to the <Link to='/eat'>eat page</Link></p>
@@ -41,7 +42,7 @@ const Home = () => {
 
       <SpellWordForm />
       {/* <button onClick={() => navigate('order-summary', {replace: true})}>Place Order</button> */}
-    </>
+    </div>
   )
 };
 
