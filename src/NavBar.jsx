@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { Navbar, Nav, NavItem } from 'reactstrap';
 import { useContext } from "react";
 // import CurrUserContext from "./CurrUserContext";
+import {modalData} from './helpers';
 import './NavBar.css'
 
 import ModalBox from "./ModalBox";
@@ -12,6 +13,10 @@ const NavBar = ({logout}) => {
   let user = 'test';
 
   // if (currentUser) user = currentUser.user;
+
+  const howToPlay = modalData.howTo;
+  const about = modalData.about;
+  const stats = modalData.stats;
 
   return (
     // <nav className="NavBar">
@@ -38,19 +43,30 @@ const NavBar = ({logout}) => {
             </ModalFooter>
           </Modal> */}
           <ModalBox 
-            modalName='Stats' 
-            title='Stats'
-            body='Here are your stats:'
+            modalName={stats.name} 
+            title={stats.title}
+            body1='Here are your stats:'
           />
           <ModalBox 
-            modalName='About' 
-            title='About'
-            body='Uses the Merriam-Webster Dictionary API'
+            modalName={about.name} 
+            title={about.title}
+            body1={about.body1}
+            body2={about.body2}
+            body3={about.body3}
+            body4={about.body4}
           />
-          <ModalBox 
+          {/* <ModalBox 
             modalName='How to Play' 
             title='How to Play'
             body='This is how to play the Spelling Bee'
+          /> */}
+          <ModalBox 
+            modalName={howToPlay.name} 
+            title={howToPlay.title}
+            body1={howToPlay.body1}
+            body2={howToPlay.body2}
+            body3={howToPlay.body3}
+            body4={howToPlay.body4}
           />
           {/* {currentUser ?  */}
 

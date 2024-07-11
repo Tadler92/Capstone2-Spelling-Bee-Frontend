@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import SpellWordForm from "./SpellWordForm";
 import GuessedAnswer from "./GuessedAnswer";
 import SpellingBeeApi from "./api";
-import getDictWord from "./helpers";
+import {getDictWord} from "./helpers";
 import CurrUserContext from "./CurrUserContext";
 import CountdonwClock from "./CountdownClock";
 import Countdown from "react-countdown";

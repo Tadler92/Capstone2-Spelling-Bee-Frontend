@@ -9,7 +9,7 @@ import {
 import "./ModalBox.css"
 
 
-const ModalBox = ({modalName, title, body}) => {
+const ModalBox = ({modalName, title, body1, body2, body3, body4}) => {
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
@@ -35,7 +35,10 @@ const ModalBox = ({modalName, title, body}) => {
         </ModalHeader>
         <ModalBody className="bg-dark">
           {/* Test text for test Modal */}
-          {body}
+          <p>{body1}</p>
+          <p>{body2}</p>
+          <p>{body3}</p>
+          <p>{body4}</p>
         </ModalBody>
         <ModalFooter className="bg-dark">
           <Button onClick={toggle}>Close</Button>

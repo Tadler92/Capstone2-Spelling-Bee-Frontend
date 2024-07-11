@@ -5,7 +5,7 @@ import RoutesList from './RoutesList'
 import NavBar from './NavBar'
 import moment from 'moment'
 import SpellingBeeApi from './api'
-import getDictWord from './helpers'
+import {getDictWord} from './helpers'
 import CurrUserContext from './CurrUserContext'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
