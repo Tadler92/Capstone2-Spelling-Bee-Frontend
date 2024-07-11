@@ -33,3 +33,6 @@ class SpellingBeeApi {
     return res.word;
   }
 }
+
+
+export default SpellingBeeApi;

@@ -1,8 +1,13 @@
 .GuessedAnswer {
   height: 40px;
+  width: 580px;
   border: solid 1px steelblue;
 }
 
 .GuessedAnswer-active {
   border: solid 2px rgb(158, 156, 156);
 }
+
+/* .GuessedAnswer-correct {
+  color: green;
+} */

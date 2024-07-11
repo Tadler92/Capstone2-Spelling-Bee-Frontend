@@ -20,7 +20,7 @@ const SpellWordForm = ({compareWords}) => {
   const handleSubmit = e => {
     e.preventDefault();
     // console.log(formData);
-    compareWords(formData);
+    compareWords(formData.guess);
     setFormData(INITIAL_STATE);
   }
 

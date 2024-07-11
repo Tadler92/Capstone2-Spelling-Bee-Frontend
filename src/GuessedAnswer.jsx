@@ -3,32 +3,33 @@ import { Form, FormGroup, Label, Input, Button, Row, Col, InputGroup } from "rea
 import './GuessedAnswer.css'
 
 
-const GuessedAnswer = ({guess}) => {
-  const INITIAL_STATE = {
-    guess: ''
-  }
+const GuessedAnswer = ({guess, correct}) => {
+  const [correctClass, setCorrectClass] = useState({
+    trueText: "GuessedAnswer my-3 bg-success",
+    falseText: "GuessedAnswer my-3 bg-danger",
+  });
 
-  const [formData, setFormData] = useState(INITIAL_STATE);
-
-  const handleChange = e => {
-    const {name, value} = e.target;
-    setFormData(formData => ({
-      ...formData,
-      [name]: value
-    }))
-  }
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    // console.log(formData);
-    compareWords(formData);
-    setFormData(INITIAL_STATE);
-  }
+  if (correct === null) {
+    correctClass['falseText'] = "GuessedAnswer my-3"
+  } else {
+    correctClass['falseText'] = "GuessedAnswer my-3 bg-danger"
+  };
 
   return (
     // <div className="GuessedAnswer border border-danger my-3">
-    <div className="GuessedAnswer my-3">
-      <p>{guess}</p>
+    // <div className="GuessedAnswer my-3">
+    <div className={correct ?
+      correctClass['trueText'] :
+      correctClass['falseText']
+    }>
+      {/* <p className={correct ? "GuessedAnswer-correct" : "GuessedAnswer-incorrect"}> */}
+      {/* <p className={correct ? 
+        "text-success pt-1" : 
+        "text-danger pt-1"
+      }> */}
+      <p className='pt-1'>
+        {guess}
+      </p>
     </div>
 
     // <Form className="SearchForm mb-3" onSubmit={handleSubmit}>
