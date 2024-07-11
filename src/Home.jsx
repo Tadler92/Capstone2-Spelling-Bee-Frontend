@@ -8,6 +8,7 @@ import {getDictWord} from "./helpers";
 import CurrUserContext from "./CurrUserContext";
 import CountdonwClock from "./CountdownClock";
 import Countdown from "react-countdown";
+import Hints from "./Hints";
 import "./Home.css"
 
 const Home = () => {
@@ -67,6 +68,9 @@ const Home = () => {
 
   // let todayObj = getDictWord(dailyWord);
   console.log('Daily Word Object in Home.jsx', dailyWordObj);
+  let etArr = dailyWordObj['etymology'].split('{');
+  console.log(etArr);
+  console.log(etArr[0]);
 
   const checkGuess = (guess) => {
     guesses[guessCount]['guess'] = guess;
@@ -137,9 +141,13 @@ const Home = () => {
           </audio>
         </div>
 
-        {/* <div>
-          <button onClick={() => console.log(1+1)}>Submit</button>
-        </div> */}
+        <div>
+          <Hints 
+            definition={dailyWordObj.definition} 
+            partOfSpeach={dailyWordObj.partOfSpeech}
+            etymology={etArr[0]}
+          />
+        </div>
 
         <SpellWordForm compareWords={checkGuess} />
       </div>
