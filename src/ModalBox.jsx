@@ -24,7 +24,7 @@ const ModalBox = ({modalName, title, body}) => {
         {modalName}
       </Button>
 
-      <Modal isOpen={modal} toggle={toggle}>
+      <Modal isOpen={modal} toggle={toggle} fade={true}>
         <ModalHeader 
           toggle={toggle} 
           className="bg-dark"
