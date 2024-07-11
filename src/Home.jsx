@@ -61,10 +61,10 @@ const Home = () => {
   //   getWord();
   // }, []);
 
-  console.log('The Daily Word', dailyWord)
+  console.log('The Daily Word in Home.jsx', dailyWord)
 
   // let todayObj = getDictWord(dailyWord);
-  console.log('Daily Word Object', dailyWordObj);
+  console.log('Daily Word Object in Home.jsx', dailyWordObj);
 
   const checkGuess = (guess) => {
     guesses[guessCount]['guess'] = guess;
@@ -82,6 +82,11 @@ const Home = () => {
     }
 
     console.log('Correct/Incorrect guess: ', guesses);
+
+    if (guessCount >= 5 || guesses[guessCount]['correctGuess']) dailyWord['complete'] = true;
+
+    // console.log('Daily word in checkGuess', dailyWord);
+    // console.log('guessCount in checkGuess', guessCount);
   }
 
   return (

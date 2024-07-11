@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Form, FormGroup, Label, Input, Button, Row, Col, InputGroup } from "reactstrap";
 import './GuessedAnswer.css'
 
 
@@ -31,29 +30,6 @@ const GuessedAnswer = ({guess, correct}) => {
         {guess}
       </p>
     </div>
-
-    // <Form className="SearchForm mb-3" onSubmit={handleSubmit}>
-    //   <Row className="align-items-center">
-    //     <Col sm={12}>
-    //       <FormGroup>
-    //         <Label htmlFor="guess"></Label>
-    //         <Input 
-    //           id="guess"
-    //           type="text"
-    //           name="guess"
-    //           placeholder="Enter guess for correct word spelling"
-    //           value={formData.guess}
-    //           onChange={handleChange}
-    //           className="p-2"
-    //         />
-    //       </FormGroup>
-    //     </Col>
-
-    //     <Col sm={12}>
-    //       <Button className="p-2 bg-success">Submit</Button>
-    //     </Col>
-    //   </Row>
-    // </Form>
   )
 };
 

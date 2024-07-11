@@ -28,7 +28,9 @@ function App() {
       try {
         // const word = await SpellingBeeApi.getWord(wordID);
         const word = await SpellingBeeApi.getWord(todayWordID);
+        word['complete'] = false;
         if (!ignore) setDailyWord(word);
+        
 
         const todayObj = await getDictWord(dailyWord.word);
         if (!ignore) setDailyWordObj(todayObj);
@@ -46,6 +48,8 @@ function App() {
   // }, [wordID, dailyWord.word]);
   }, [todayWordID, dailyWord.word]);
   // }, []);
+
+  console.log('Daily Word in App.jsx', dailyWord);
 
 
   // const start = moment('07-09-2024', 'MM-DD-YYYY');

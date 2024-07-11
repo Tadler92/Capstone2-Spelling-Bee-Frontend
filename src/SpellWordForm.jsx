@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Form, FormGroup, Label, Input, Button, Row, Col, InputGroup } from "reactstrap";
+import CurrUserContext from "./CurrUserContext";
 
 
 const SpellWordForm = ({compareWords}) => {
@@ -8,6 +9,8 @@ const SpellWordForm = ({compareWords}) => {
   }
 
   const [formData, setFormData] = useState(INITIAL_STATE);
+
+  const {dailyWord} = useContext(CurrUserContext);
 
   const handleChange = e => {
     const {name, value} = e.target;
@@ -39,12 +42,18 @@ const SpellWordForm = ({compareWords}) => {
               value={formData.guess}
               onChange={handleChange}
               className="p-2"
+              disabled={dailyWord['complete'] ? true : false}
             />
           </FormGroup>
         </Col>
 
         <Col sm={12}>
-          <Button className="p-2 bg-success">Submit</Button>
+          <Button 
+            className="p-2 bg-success"
+            disabled={dailyWord['complete'] ? true : false}
+          >
+            Submit
+          </Button>
         </Col>
       </Row>
 
