@@ -6,6 +6,8 @@ import GuessedAnswer from "./GuessedAnswer";
 import SpellingBeeApi from "./api";
 import getDictWord from "./helpers";
 import CurrUserContext from "./CurrUserContext";
+import CountdonwClock from "./CountdownClock";
+import Countdown from "react-countdown";
 import "./Home.css"
 
 const Home = () => {
@@ -43,7 +45,7 @@ const Home = () => {
   ]
 
   const navigate = useNavigate();
-  const {dailyWord, dailyWordObj} = useContext(CurrUserContext);
+  const {dailyWord, dailyWordObj, duration, tomorrow} = useContext(CurrUserContext);
   // const [dailyWord, setDailyWord] = useState({});
   // const [dailyWordObj, setDailyWordObj] = useState({});
   const [guesses, setGuesses] = useState(INITIAL_STATE);
@@ -140,6 +142,12 @@ const Home = () => {
 
       <SpellWordForm compareWords={checkGuess} />
       {/* <button onClick={() => navigate('order-summary', {replace: true})}>Place Order</button> */}
+
+      {/* <CountdonwClock duration={duration} /> */}
+
+      <div hidden={!dailyWord['complete']}>
+        <Countdown date={tomorrow.format()} daysInHours={true} />
+      </div>
     </div>
   )
 };

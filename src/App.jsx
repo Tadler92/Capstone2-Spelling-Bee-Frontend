@@ -58,14 +58,28 @@ function App() {
   // let today = moment();
   console.log('This is today', today);
   console.log('This is today date', today.get('date'));
-  console.log('This is tomorrow date', (today.get('date') + 1));
+  console.log('This is today Full', today.format("dddd, MMMM Do YYYY, h:mm:ss a"));
+  // console.log('This is tomorrow date', (today.get('date') + 1));
+
+  let tomorrow = today.clone();
+  tomorrow.add(1, 'day').startOf('day');
+  console.log('This is tomorrow Full', tomorrow.format("dddd, MMMM Do YYYY, h:mm:ss a"));
+  console.log('This is alt tomorrow Full', tomorrow.format("ddd MMM D YYYY h:mm:ss"));
 
   console.log('Moment Difference:', today.diff(start, 'days'));
+
+  let duration = moment.duration(tomorrow.diff(today));
+  console.log('Testing what duration is:', duration);
+  console.log('Duration milliseconds', duration.asMilliseconds())
+  console.log('Duration milliseconds', duration.milliseconds())
+  console.log('Duration seconds', duration.seconds())
+  console.log('Duration minutes', duration.minutes())
+  console.log('Duration hours', duration.hours())
 
   return (
     <>
       <div>
-        <CurrUserContext.Provider value={{dailyWord, dailyWordObj}}>
+        <CurrUserContext.Provider value={{dailyWord, dailyWordObj, duration, tomorrow}}>
           <NavBar />
           <RoutesList />
         </CurrUserContext.Provider>
