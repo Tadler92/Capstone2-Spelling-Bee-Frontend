@@ -130,23 +130,27 @@ const Home = () => {
       ))} */}
       </div>
 
-      <div>
-        <audio id="audioElement" controls src={`${dailyWordObj.audio}`}>
-          Your browser does not support the audio element.
-        </audio>
+      <div hidden={dailyWord['complete']}>
+        <div>
+          <audio id="audioElement" controls src={`${dailyWordObj.audio}`}>
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        {/* <div>
+          <button onClick={() => console.log(1+1)}>Submit</button>
+        </div> */}
+
+        <SpellWordForm compareWords={checkGuess} />
       </div>
-
-      {/* <div>
-        <button onClick={() => console.log(1+1)}>Submit</button>
-      </div> */}
-
-      <SpellWordForm compareWords={checkGuess} />
-      {/* <button onClick={() => navigate('order-summary', {replace: true})}>Place Order</button> */}
 
       {/* <CountdonwClock duration={duration} /> */}
 
       <div hidden={!dailyWord['complete']}>
-        <Countdown date={tomorrow.format()} daysInHours={true} />
+        <h2>Time Until Next Word:</h2>
+        <h3>
+          <Countdown date={tomorrow.format()} daysInHours={true} />
+        </h3>
       </div>
     </div>
   )
