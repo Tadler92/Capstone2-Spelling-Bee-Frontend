@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import CurrUserContext from "./CurrUserContext";
 
 import { 
   Button, 
@@ -11,7 +12,12 @@ import {
 import "./ModalBox.css"
 
 
-const ModalBox = ({modalName, title, body1, body2, body3, body4}) => {
+const ModalBox = ({modalName, title, body1, body2, body3, body4, logout=null}) => {
+  const {currentUser} = useContext(CurrUserContext);
+  let user;
+
+  if (currentUser) user = currentUser.user;
+
   const navigate = useNavigate();
   const [modal, setModal] = useState(false);
 
@@ -43,6 +49,40 @@ const ModalBox = ({modalName, title, body1, body2, body3, body4}) => {
           <p>{body3}</p>
           <p>{body4}</p>
 
+          {currentUser ? 
+            (logout ?
+              <button 
+                onClick={logout} 
+                className="btn btn-sm btn-danger mx-2"
+              >
+                Logout
+              </button> : 
+              null) :
+            (body4.includes('sign up') ? 
+              <>
+                <Link 
+                  to='/signup' 
+                  className="btn btn-sm btn-primary"
+                  onClick={toggle}
+                >
+                  Sign up
+                </Link>
+                <Link 
+                  to='/login' 
+                  className="btn btn-sm btn-primary mx-3"
+                  onClick={toggle}
+                >
+                  Login
+                </Link>
+              </> :
+              null)
+          }
+
+          {/* {logout ? 
+            <button onClick={logout} className="btn btn-sm btn-danger mx-2">Logout</button> :
+            null
+          }
+
           {body4.includes('sign up') ? 
             <Link to='/signup' className="btn btn-sm btn-primary">Sign up</Link> : 
             null
@@ -50,7 +90,7 @@ const ModalBox = ({modalName, title, body1, body2, body3, body4}) => {
           {body4.includes('sign up') ? 
             <Link to='/login' className="btn btn-sm btn-primary mx-3">Login</Link> : 
             null
-          }
+          } */}
         </ModalBody>
         <ModalFooter className="bg-dark">
           <Button onClick={toggle}>Close</Button>

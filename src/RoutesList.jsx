@@ -10,7 +10,7 @@ import LoginForm from "./LoginForm";
 // import AdminDashboard from "./AdminDashboard";
 
 
-function RoutesList() {
+function RoutesList({login, signup}) {
   return (
     <Routes>
       {/* <Route path="/about" element={<About />} /> */}
@@ -18,8 +18,8 @@ function RoutesList() {
       {/* <Route path="/users/:username" element={<AdminPage />} /> */}
       {/* <Route path="/admin" element={<AdminDashboard />} /> */}
       <Route path="/" element={<Home />} />
-      <Route path="/signup" element={<SignupForm />} />
-      <Route path="/login" element={<LoginForm />} />
+      <Route path="/signup" element={<SignupForm signup={signup} />} />
+      <Route path="/login" element={<LoginForm login={login} />} />
 
       <Route path="*" element={<Navigate to='/' replace />} />
 

@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Navbar, Nav, NavItem } from 'reactstrap';
-import { useContext } from "react";
+// import { useContext } from "react";
 // import CurrUserContext from "./CurrUserContext";
 import {modalData} from './helpers';
 import './NavBar.css'
@@ -10,7 +10,7 @@ import ModalBox from "./ModalBox";
 
 const NavBar = ({logout}) => {
   // const {currentUser} = useContext(CurrUserContext);
-  let user = 'test';
+  // let user;
 
   // if (currentUser) user = currentUser.user;
 
@@ -47,6 +47,7 @@ const NavBar = ({logout}) => {
             title={stats.title}
             body1='Here are your stats:'
             body4={stats.body4}
+            logout={logout}
           />
           <ModalBox 
             modalName={about.name} 

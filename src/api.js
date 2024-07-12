@@ -32,6 +32,25 @@ class SpellingBeeApi {
     let res = await this.request(`words/${id}`);
     return res.word;
   }
+
+  static async userLogin(loginData) {
+    let res = await this.request(`auth/login`, loginData, 'post');
+    console.log('getToken API', res)
+    return res.token;
+  }
+
+  static async userSignup(signupData) {
+    console.log('register signup data', signupData)
+    let res = await this.request(`auth/signup`, signupData, 'post');
+    console.log('register API', res)
+    return res.token;
+  }
+
+  static async getCurrUser(username) {
+    let res = await this.request(`users/${username}`);
+    console.log('current user API', res)
+    return res;
+  }
 }
 
 
