@@ -33,6 +33,7 @@ function App() {
         
 
         const todayObj = await getDictWord(dailyWord.word);
+        console.log('todayObj in App.jsx', todayObj)
         if (!ignore) setDailyWordObj(todayObj);
       } catch (err) {
         console.log("Error getting word information", err)

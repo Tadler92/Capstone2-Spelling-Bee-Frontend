@@ -7,12 +7,15 @@ async function getDictWord(word) {
 
   let wordAudio = res.data[0].hwi.prs[0].sound.audio;
   let subdirectory = wordAudio[0];
+  let etArr = res.data[0].et[0][1].split('{');
+  let shortEt = etArr[0];
 
   let wordObj = {
     audio: `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subdirectory}/${wordAudio}.mp3`,
     definition: res.data[0].shortdef[0],
     partOfSpeech: res.data[0].fl,
-    etymology: res.data[0].et[0][1]
+    // etymology: res.data[0].et[0][1]
+    etymology: shortEt
   };
 
   return wordObj;
@@ -22,7 +25,10 @@ const modalData = {
   stats: {
     name: 'Stats',
     title: 'Stats',
-    body: 'Here are your stats:'
+    body1: 'Here are your stats:',
+    body2: 'Here are your stats:',
+    body3: 'Here are your stats:',
+    body4: 'Click the link(s) below to sign up or log in and save your stats and earned points!',
   },
   about: {
     name: 'About',

@@ -46,6 +46,7 @@ const NavBar = ({logout}) => {
             modalName={stats.name} 
             title={stats.title}
             body1='Here are your stats:'
+            body4={stats.body4}
           />
           <ModalBox 
             modalName={about.name} 

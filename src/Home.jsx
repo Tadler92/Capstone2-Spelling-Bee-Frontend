@@ -68,9 +68,6 @@ const Home = () => {
 
   // let todayObj = getDictWord(dailyWord);
   console.log('Daily Word Object in Home.jsx', dailyWordObj);
-  let etArr = dailyWordObj['etymology'].split('{');
-  console.log(etArr);
-  console.log(etArr[0]);
 
   const checkGuess = (guess) => {
     guesses[guessCount]['guess'] = guess;
@@ -145,7 +142,7 @@ const Home = () => {
           <Hints 
             definition={dailyWordObj.definition} 
             partOfSpeach={dailyWordObj.partOfSpeech}
-            etymology={etArr[0]}
+            etymology={dailyWordObj.etymology}
           />
         </div>
 

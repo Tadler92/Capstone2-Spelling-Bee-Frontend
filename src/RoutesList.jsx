@@ -1,6 +1,8 @@
 import { Routes, Route, Navigate, redirect } from "react-router-dom";
 
 import Home from "./Home";
+import SignupForm from "./SignupForm";
+import LoginForm from "./LoginForm";
 // import AdminPage from "./AdminPage";
 // import About from './About'
 // import Contact from './Contact'
@@ -16,6 +18,8 @@ function RoutesList() {
       {/* <Route path="/users/:username" element={<AdminPage />} /> */}
       {/* <Route path="/admin" element={<AdminDashboard />} /> */}
       <Route path="/" element={<Home />} />
+      <Route path="/signup" element={<SignupForm />} />
+      <Route path="/login" element={<LoginForm />} />
 
       <Route path="*" element={<Navigate to='/' replace />} />
 
