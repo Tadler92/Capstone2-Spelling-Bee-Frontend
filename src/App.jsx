@@ -35,6 +35,10 @@ function App() {
         let currUserInfo = await SpellingBeeApi.getCurrUser(username);
         console.log('currUserInfo in App.jsx', currUserInfo);
         setCurrentUser(currUserInfo);
+
+        let checkWordStatus = await SpellingBeeApi.getWordCompletion(currUserInfo.user.username, todayWordID);
+        console.log('checking Word Status in APP.JSX', checkWordStatus);
+
       } catch (err) {
         console.log('Error getting user information', err);
       };
@@ -136,7 +140,8 @@ function App() {
             dailyWordObj, 
             duration, 
             tomorrow,
-            currentUser}}
+            currentUser,
+            todayWordID}}
         >
           <NavBar logout={logout} />
           <RoutesList login={login} signup={signup} />

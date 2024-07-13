@@ -46,11 +46,22 @@ const Home = () => {
   ]
 
   const navigate = useNavigate();
-  const {dailyWord, dailyWordObj, duration, tomorrow} = useContext(CurrUserContext);
+  const {
+    dailyWord, 
+    dailyWordObj, 
+    duration, 
+    tomorrow, 
+    currentUser, 
+    todayWordID
+  } = useContext(CurrUserContext);
   // const [dailyWord, setDailyWord] = useState({});
   // const [dailyWordObj, setDailyWordObj] = useState({});
   const [guesses, setGuesses] = useState(INITIAL_STATE);
   const [guessCount, setGuessCount] = useState(0);
+
+  let user;
+
+  if (currentUser) user = currentUser.user;
 
   // useEffect(() => {
   //   async function getWord() {
@@ -69,13 +80,24 @@ const Home = () => {
   // let todayObj = getDictWord(dailyWord);
   console.log('Daily Word Object in Home.jsx', dailyWordObj);
 
-  const checkGuess = (guess) => {
+  const checkGuess = async (guess) => {
     guesses[guessCount]['guess'] = guess;
 
 
     if (guess === dailyWord.word) {
       guesses[guessCount]['correctGuess'] = true;
+      console.log('current guessCount in Home.jsx', guessCount);
+
+      if (user) {
+        const userPoints = await SpellingBeeApi.addPointsToUser(user.username, (guessCount + 1));
+        console.log('checking userPoints in Home.jsx', userPoints);
+
+        const userGuess = await SpellingBeeApi.addGuessToUser(user.username, (guessCount + 1));
+        console.log('checking userGuess in Home.jsx', userGuess);
+      };
+
       setGuessCount(guessCount + 1);
+      console.log('guessCount + 1 in Home.jsx', (guessCount + 1)); 
     }
     else {
       console.log('guessCount', guessCount);
@@ -86,7 +108,22 @@ const Home = () => {
 
     console.log('Correct/Incorrect guess: ', guesses);
 
-    if (guessCount >= 5 || guesses[guessCount]['correctGuess']) dailyWord['complete'] = true;
+    if (guessCount >= 5 || guesses[guessCount]['correctGuess']) {
+      dailyWord['complete'] = true;
+
+      // guesses[guessCount]['correctGuess'] ? 
+      const userWord = (guesses[guessCount]['correctGuess'] ? 
+        await SpellingBeeApi.addWordToUser(user.username, todayWordID, {
+          completed: true,
+          solved: true
+        }) : 
+        await SpellingBeeApi.addWordToUser(user.username, todayWordID, {
+          completed: true,
+          solved: false
+        }));
+
+      console.log('checking userWord in Home.jsx', userWord);
+    };
 
     // console.log('Daily word in checkGuess', dailyWord);
     // console.log('guessCount in checkGuess', guessCount);

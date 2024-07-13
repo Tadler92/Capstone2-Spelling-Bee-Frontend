@@ -35,20 +35,46 @@ class SpellingBeeApi {
 
   static async userLogin(loginData) {
     let res = await this.request(`auth/login`, loginData, 'post');
-    console.log('getToken API', res)
+    console.log('getToken API', res);
     return res.token;
   }
 
   static async userSignup(signupData) {
     console.log('register signup data', signupData)
     let res = await this.request(`auth/signup`, signupData, 'post');
-    console.log('register API', res)
+    console.log('register API', res);
     return res.token;
   }
 
   static async getCurrUser(username) {
     let res = await this.request(`users/${username}`);
-    console.log('current user API', res)
+    console.log('current user API', res);
+    return res;
+  }
+
+  static async addPointsToUser(username, pointsID) {
+    // let res = await this.request(`users/${username}/points/${pointsID}`, method='post');
+    let res = await this.request(`users/${username}/points/${pointsID}`, {}, 'post');
+    console.log('added points to user in API', res);
+    return res;
+  }
+
+  static async addGuessToUser(username, guessID) {
+    // let res = await this.request(`users/${username}/guess/${guessID}`, method='patch');
+    let res = await this.request(`users/${username}/guess/${guessID}`, {}, 'patch');
+    console.log('added guess to user in API', res);
+    return res;
+  }
+
+  static async addWordToUser(username, wordID, completionData) {
+    let res = await this.request(`users/${username}/word/${wordID}`, completionData, 'post');
+    console.log('added word to user in API', res);
+    return res;
+  }
+
+  static async getWordCompletion(username, wordID) {
+    let res = await this.request(`users/${username}/word/${wordID}`);
+    console.log('added word to user in API', res);
     return res;
   }
 }
