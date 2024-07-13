@@ -52,7 +52,8 @@ const Home = () => {
     duration, 
     tomorrow, 
     currentUser, 
-    todayWordID
+    todayWordID,
+    wordAlreadyComplete
   } = useContext(CurrUserContext);
   // const [dailyWord, setDailyWord] = useState({});
   // const [dailyWordObj, setDailyWordObj] = useState({});
@@ -168,7 +169,7 @@ const Home = () => {
       ))} */}
       </div>
 
-      <div hidden={dailyWord['complete']}>
+      <div hidden={(dailyWord['complete'] || wordAlreadyComplete)}>
         <div>
           <audio id="audioElement" controls src={`${dailyWordObj.audio}`}>
             Your browser does not support the audio element.
@@ -188,7 +189,7 @@ const Home = () => {
 
       {/* <CountdonwClock duration={duration} /> */}
 
-      <div hidden={!dailyWord['complete']}>
+      <div hidden={(!dailyWord['complete'] && !wordAlreadyComplete)}>
         <h2>Time Until Next Word:</h2>
         <h3>
           <Countdown date={tomorrow.format()} daysInHours={true} />

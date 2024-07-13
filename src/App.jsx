@@ -19,6 +19,7 @@ function App() {
   const [storedToken, setStoredToken] = useLocalStorage('user-token', null);
   const [dailyWord, setDailyWord] = useState({});
   const [dailyWordObj, setDailyWordObj] = useState({});
+  const [wordAlreadyComplete, setWordAlreadyComplete] = useState(false);
   const start = moment('07-09-2024', 'MM-DD-YYYY');
   let today = moment();
   let todayWordID = today.diff(start, 'days');
@@ -38,6 +39,7 @@ function App() {
 
         let checkWordStatus = await SpellingBeeApi.getWordCompletion(currUserInfo.user.username, todayWordID);
         console.log('checking Word Status in APP.JSX', checkWordStatus);
+        setWordAlreadyComplete(checkWordStatus.wordCompletion.completed);
 
       } catch (err) {
         console.log('Error getting user information', err);
@@ -141,7 +143,8 @@ function App() {
             duration, 
             tomorrow,
             currentUser,
-            todayWordID}}
+            todayWordID,
+            wordAlreadyComplete}}
         >
           <NavBar logout={logout} />
           <RoutesList login={login} signup={signup} />
