@@ -19,7 +19,8 @@ const ModalBox = ({modalName, title, body1, body2, body3, body4, logout=null}) =
   if (currentUser) user = currentUser.user;
 
   const navigate = useNavigate();
-  const [modal, setModal] = useState(false);
+  // const [modal, setModal] = useState(false);
+  const [modal, setModal] = ((!currentUser) && title === 'How to Play') ? useState(true) : useState(false);
 
   const toggle = () => setModal(!modal);
 
@@ -76,6 +77,27 @@ const ModalBox = ({modalName, title, body1, body2, body3, body4, logout=null}) =
                 </Link>
               </> :
               null)
+          }
+
+          {((!currentUser) && title === "How to Play") ? 
+              <>
+                <p>You can sign up/login to keep track of your stats by clicking below.</p>
+                <Link 
+                  to='/signup' 
+                  className="btn btn-sm btn-primary"
+                  onClick={toggle}
+                >
+                  Sign up
+                </Link>
+                <Link 
+                  to='/login' 
+                  className="btn btn-sm btn-primary mx-3"
+                  onClick={toggle}
+                >
+                  Login
+                </Link>
+              </> :
+              null
           }
 
           {/* {logout ? 
