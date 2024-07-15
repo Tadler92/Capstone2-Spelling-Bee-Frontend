@@ -98,6 +98,9 @@ const ModalBox = ({modalName, title, body1, body2, body3, body4, logout=null}) =
           {((!currentUser) && title === "How to Play") ? 
               <>
                 <p>You can sign up/login to keep track of your stats by clicking below.</p>
+                <p className="text-warning"><small>
+                  Note: Be sure to Sign Up or Login prior to completing your attempt at the Daily word; otherwise, you will not receive the full possible points from an attempt.
+                </small></p>
                 <Link 
                   to='/signup' 
                   className="btn btn-sm btn-primary"
