@@ -20,9 +20,44 @@ function App() {
   const [dailyWord, setDailyWord] = useState({});
   const [dailyWordObj, setDailyWordObj] = useState({});
   const [wordAlreadyComplete, setWordAlreadyComplete] = useState(false);
-  const start = moment('07-09-2024', 'MM-DD-YYYY');
+
+  const [totalPoints, setTotalPoints] = useState(0);
+  const [playedWords, setPlayedWords] = useState(0);
+  const [solvedWords, setSolvedWords] = useState(0);
+
+  const start = moment('07-13-2024', 'MM-DD-YYYY');
   let today = moment();
   let todayWordID = today.diff(start, 'days');
+
+  // let totalPoints = 0;
+  // let solvedWords = 0;
+  // let playedWords = 0;
+
+  // if (currentUser) {
+  //   totalPoints = currentUser.user.points.reduce(
+  //     (accumulator, currentValue) => accumulator + currentValue,
+  //     0,
+  //   );
+
+  //   playedWords = currentUser.user.playedWords.length;
+
+  //   currentUser.user.playedWords.map(wordObj => (
+  //     wordObj.solved ? 
+  //     (solvedWords += 1) :
+  //     (solvedWords + 0)
+  //   ));
+  // };
+
+  const updateStats = (complete=true, solved=false, pts=0) => {
+    solved ? (
+      setTotalPoints(totalPoints + pts),
+      setSolvedWords(solvedWords + 1),
+      setPlayedWords(playedWords + 1)
+    ) :
+    setPlayedWords(playedWords + 1)
+
+    console.log('updated stats', totalPoints, solvedWords, playedWords);
+  };
 
   // const begin = 1;
   // let stop = 2;
@@ -40,6 +75,22 @@ function App() {
         let checkWordStatus = await SpellingBeeApi.getWordCompletion(currUserInfo.user.username, todayWordID);
         console.log('checking Word Status in APP.JSX', checkWordStatus);
         setWordAlreadyComplete(checkWordStatus.wordCompletion.completed);
+
+        if (currUserInfo) {
+          setTotalPoints(currUserInfo.user.points.reduce(
+            (accumulator, currentValue) => accumulator + currentValue,
+            0,
+          ));
+          // console.log('*********user points APP.JSX', currUserInfo.user.points, totalPoints)
+      
+          setPlayedWords(currUserInfo.user.playedWords.length);
+      
+          currUserInfo.user.playedWords.map(wordObj => (
+            wordObj.solved ? 
+            setSolvedWords(solvedWords + 1) :
+            setSolvedWords(solvedWords + 0)
+          ));
+        };
 
       } catch (err) {
         console.log('Error getting user information', err);
@@ -85,8 +136,12 @@ function App() {
       setToken(token);
       setStoredToken(token);
       SpellingBeeApi.token = token;
+
+      return {logIn: 'Success'};
+
     } catch (err) {
       console.log('LOGIN ERROR', err);
+      return {loginError: err};
     };
   };
 
@@ -97,8 +152,12 @@ function App() {
       setToken(token);
       setStoredToken(token);
       SpellingBeeApi.token = token;
+
+      return {signUP: 'Success'};
+
     } catch (err) {
       console.log('SIGNUP ERROR', err);
+      return {signupError: err};
     };
   };
 
@@ -144,7 +203,11 @@ function App() {
             tomorrow,
             currentUser,
             todayWordID,
-            wordAlreadyComplete}}
+            wordAlreadyComplete,
+            totalPoints,
+            solvedWords,
+            playedWords,
+            updateStats}}
         >
           <NavBar logout={logout} />
           <RoutesList login={login} signup={signup} />

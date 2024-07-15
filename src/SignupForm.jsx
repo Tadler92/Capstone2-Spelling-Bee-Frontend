@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Form, FormGroup, Label, Input, Button, Row, Col, InputGroup } from "reactstrap";
 import { Navigate, useNavigate, Link } from "react-router-dom";
 import './SignupForm.css'
@@ -7,6 +7,8 @@ import './SignupForm.css'
 
 const SignupForm = ({signup}) => {
   const navigate = useNavigate();
+
+  const errRef = useRef();
 
   const INITIAL_STATE = {
     username: '',
@@ -17,6 +19,7 @@ const SignupForm = ({signup}) => {
   }
 
   const [formData, setFormData] = useState(INITIAL_STATE);
+  const [errMsg, setErrMsg] = useState('');
 
   const handleChange = e => {
     const {name, value} = e.target;
@@ -26,16 +29,27 @@ const SignupForm = ({signup}) => {
     }))
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('SignupForm formdata', formData);
-    signup(formData);
-    setFormData(INITIAL_STATE);
-    navigate('/');
+    const signupData = await signup(formData);
+    // console.log('******signupData in SignupForm.jsx', signupData);
+
+    if (signupData.signUp === 'Success') {
+      setFormData(INITIAL_STATE);
+      navigate('/');
+    } else {
+      setErrMsg(signupData.signupError[0]);
+      // console.log('******signupData in SignupForm.jsx', signupData);
+    }
+    // setFormData(INITIAL_STATE);
+    // navigate('/');
   }
 
   return (
     <div className="SignupForm">
+      <p className="bg-danger h5 py-2" hidden={errMsg ? false : true}>{errMsg}</p>
+      
       <h1>Signup</h1>
       <Form className="SignupForm-form mb-3" onSubmit={handleSubmit}>
 

@@ -53,7 +53,8 @@ const Home = () => {
     tomorrow, 
     currentUser, 
     todayWordID,
-    wordAlreadyComplete
+    wordAlreadyComplete,
+    updateStats
   } = useContext(CurrUserContext);
   // const [dailyWord, setDailyWord] = useState({});
   // const [dailyWordObj, setDailyWordObj] = useState({});
@@ -95,6 +96,10 @@ const Home = () => {
 
         const userGuess = await SpellingBeeApi.addGuessToUser(user.username, (guessCount + 1));
         console.log('checking userGuess in Home.jsx', userGuess);
+
+        updateStats(true, true, userPoints.addedPoints.awardedPoints);
+      } else {
+        updateStats(true, true, 10);
       };
 
       setGuessCount(guessCount + 1);
@@ -113,17 +118,25 @@ const Home = () => {
       dailyWord['complete'] = true;
 
       // guesses[guessCount]['correctGuess'] ? 
-      const userWord = (guesses[guessCount]['correctGuess'] ? 
+      if (currentUser) {
+      const userWord = (guesses[guessCount]['correctGuess'] ? (
         await SpellingBeeApi.addWordToUser(user.username, todayWordID, {
           completed: true,
           solved: true
-        }) : 
+        })
+        // updateStats(true, true, (user.points || 10))) : (
+        ) : (
         await SpellingBeeApi.addWordToUser(user.username, todayWordID, {
           completed: true,
           solved: false
-        }));
+        })),
+        updateStats(true, false, 0));
 
-      console.log('checking userWord in Home.jsx', userWord);
+        console.log('checking userWord in Home.jsx', userWord);
+      } else {
+        if (!guesses[guessCount]['correctGuess']) updateStats(true, false, 0);
+      }
+
     };
 
     // console.log('Daily word in checkGuess', dailyWord);

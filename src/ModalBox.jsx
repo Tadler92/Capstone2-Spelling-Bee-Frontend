@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import CurrUserContext from "./CurrUserContext";
+import Stats from "./Stats";
 
 import { 
   Button, 
@@ -41,14 +42,25 @@ const ModalBox = ({modalName, title, body1, body2, body3, body4, logout=null}) =
           cssModule={{'modal-title': 'w-100 text-center'}}
         >
           {/* Modal Test Title */}
-          {title}
+          {(title === 'Stats' && currentUser) ?
+            `${user.username} ${title}` :
+            title 
+          }
         </ModalHeader>
         <ModalBody className="bg-dark">
           {/* Test text for test Modal */}
-          <p>{body1}</p>
+          {title === 'Stats' ? 
+            <Stats /> : 
+            <>
+              <p>{body1}</p>
+              <p>{body2}</p>
+              <p>{body3}</p>
+              <p>{body4}</p>
+            </>}
+          {/* <p>{body1}</p>
           <p>{body2}</p>
           <p>{body3}</p>
-          <p>{body4}</p>
+          <p>{body4}</p> */}
 
           {currentUser ? 
             (logout ?

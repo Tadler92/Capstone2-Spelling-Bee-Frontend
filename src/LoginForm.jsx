@@ -13,6 +13,7 @@ const LoginForm = ({login}) => {
   }
 
   const [formData, setFormData] = useState(INITIAL_STATE);
+  const [errMsg, setErrMsg] = useState('');
 
   const handleChange = e => {
     const {name, value} = e.target;
@@ -22,16 +23,26 @@ const LoginForm = ({login}) => {
     }))
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // console.log(formData);
-    login(formData);
-    setFormData(INITIAL_STATE);
-    navigate('/');
+    const loginData = await login(formData);
+    // setFormData(INITIAL_STATE);
+    // navigate('/');
+
+    if (loginData.logIn === 'Success') {
+      setFormData(INITIAL_STATE);
+      navigate('/');
+    } else {
+      setErrMsg(loginData.loginError[0]);
+      // console.log('******signupData in SignupForm.jsx', signupData);
+    }
   }
 
   return (
     <div className="LoginForm">
+      <p className="bg-danger h5 py-2" hidden={errMsg ? false : true}>{errMsg}</p>
+
       <h1>Login</h1>
       <Form className="LoginForm-form mb-3" onSubmit={handleSubmit}>
 
