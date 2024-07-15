@@ -11,6 +11,7 @@ import {
   ModalFooter } from "reactstrap";
 
 import "./ModalBox.css"
+import { setupMain } from "@testing-library/user-event/dist/cjs/setup/setup.js";
 
 
 const ModalBox = ({modalName, title, body1, body2, body3, body4, logout=null}) => {
@@ -55,7 +56,10 @@ const ModalBox = ({modalName, title, body1, body2, body3, body4, logout=null}) =
               <p>{body1}</p>
               <p>{body2}</p>
               <p>{body3}</p>
-              <p>{body4}</p>
+              {title === 'About' ? 
+                <small className="text-secondary">{body4}</small> :
+                <p>{body4}</p>}
+              {/* <p>{body4}</p> */}
             </>}
           {/* <p>{body1}</p>
           <p>{body2}</p>
