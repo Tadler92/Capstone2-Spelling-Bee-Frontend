@@ -20,6 +20,7 @@ function App() {
   const [dailyWord, setDailyWord] = useState({});
   const [dailyWordObj, setDailyWordObj] = useState({});
   const [wordAlreadyComplete, setWordAlreadyComplete] = useState(false);
+  const [signupGuess, setSignupGuess] = useState({})
 
   const [totalPoints, setTotalPoints] = useState(0);
   const [playedWords, setPlayedWords] = useState(0);
@@ -153,6 +154,32 @@ function App() {
       setStoredToken(token);
       SpellingBeeApi.token = token;
 
+      if (dailyWord.complete) {
+        console.log('currentUser in signup func', currentUser);
+        console.log('signupData.username in signup func', signupData.username);
+        console.log('signupGuess in signup func', signupGuess);
+
+        (signupGuess.solved ? 
+        (
+          await SpellingBeeApi.addWordToUser(signupData.username, todayWordID, {
+          completed: true,
+          solved: true
+          }),
+          await SpellingBeeApi.addGuessToUser(signupData.username, signupGuess.guessID),
+          await SpellingBeeApi.addPointsToUser(signupData.username, 5)
+        ) :
+        await SpellingBeeApi.addWordToUser(signupData.username, todayWordID, {
+          completed: true,
+          solved: false
+        }));
+
+        // await SpellingBeeApi.addPointsToUser(currentUser.user.username, 5)
+
+        // await SpellingBeeApi.addGuessToUser(currentUser.user.username, signupGuess.guessID)
+
+        // return {signUP: 'Success'};
+      }
+
       return {signUP: 'Success'};
 
     } catch (err) {
@@ -207,7 +234,8 @@ function App() {
             totalPoints,
             solvedWords,
             playedWords,
-            updateStats}}
+            updateStats,
+            setSignupGuess}}
         >
           <NavBar logout={logout} />
           <RoutesList login={login} signup={signup} />

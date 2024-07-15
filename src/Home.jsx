@@ -54,7 +54,8 @@ const Home = () => {
     currentUser, 
     todayWordID,
     wordAlreadyComplete,
-    updateStats
+    updateStats,
+    setSignupGuess
   } = useContext(CurrUserContext);
   // const [dailyWord, setDailyWord] = useState({});
   // const [dailyWordObj, setDailyWordObj] = useState({});
@@ -100,6 +101,10 @@ const Home = () => {
         updateStats(true, true, userPoints.addedPoints.awardedPoints);
       } else {
         updateStats(true, true, 10);
+        setSignupGuess({
+          solved: true,
+          guessID: (guessCount + 1)
+        });
       };
 
       setGuessCount(guessCount + 1);

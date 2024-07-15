@@ -33,12 +33,14 @@ const SignupForm = ({signup}) => {
     e.preventDefault();
     console.log('SignupForm formdata', formData);
     const signupData = await signup(formData);
-    // console.log('******signupData in SignupForm.jsx', signupData);
+    console.log('******signupData in SignupForm.jsx', signupData);
 
-    if (signupData.signUp === 'Success') {
+    if (signupData.signUP === 'Success') {
+      console.log('**** IT WORKED GOING BACK HOME!!! ****');
       setFormData(INITIAL_STATE);
       navigate('/');
     } else {
+      console.log('**** IT DID NOT WORK....STAYING ON PAGE!!! ****');
       setErrMsg(signupData.signupError[0]);
       // console.log('******signupData in SignupForm.jsx', signupData);
     }
@@ -49,7 +51,7 @@ const SignupForm = ({signup}) => {
   return (
     <div className="SignupForm">
       <p className="bg-danger h5 py-2" hidden={errMsg ? false : true}>{errMsg}</p>
-      
+
       <h1>Signup</h1>
       <Form className="SignupForm-form mb-3" onSubmit={handleSubmit}>
 
