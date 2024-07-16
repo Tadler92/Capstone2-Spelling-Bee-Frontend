@@ -26,7 +26,7 @@ function App() {
   const [playedWords, setPlayedWords] = useState(0);
   const [solvedWords, setSolvedWords] = useState(0);
 
-  const start = moment('07-13-2024', 'MM-DD-YYYY');
+  const start = moment('07-09-2024', 'MM-DD-YYYY');
   let today = moment();
   let todayWordID = today.diff(start, 'days');
 
@@ -194,6 +194,21 @@ function App() {
     setStoredToken(null);
   }
 
+  async function addWord(wordData) {
+    try {
+      let newWord = await SpellingBeeApi.addWord(wordData);
+
+      console.log('newWord in APP.JSX', newWord);
+
+      return {wordAdded: 'Success'}
+      
+    } catch (err) {
+      console.log('ERROR ADDING WORD', err);
+
+      return {addingError: err}
+    }
+  }
+
 
   // const start = moment('07-09-2024', 'MM-DD-YYYY');
   console.log('This is start day', start);
@@ -238,7 +253,7 @@ function App() {
             setSignupGuess}}
         >
           <NavBar logout={logout} />
-          <RoutesList login={login} signup={signup} />
+          <RoutesList login={login} signup={signup} addWord={addWord} />
         </CurrUserContext.Provider>
       </div>
     </>

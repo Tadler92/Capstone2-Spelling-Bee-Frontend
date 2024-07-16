@@ -5,10 +5,20 @@ import collegiateDictKey from "./secret";
 async function getDictWord(word) {
   let res = await axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${collegiateDictKey}`);
 
+  // console.log('Res from requestin Dict.com', res)
+  // console.log('Res from requestin Dict.com', res.data)
+  // console.log('Res from requestin Dict.com', res.data[0])
+  // console.log('ETYMOLOGY from requestin Dict.com', res.data[0].et)
+
   let wordAudio = res.data[0].hwi.prs[0].sound.audio;
   let subdirectory = wordAudio[0];
-  let etArr = res.data[0].et[0][1].split('{');
-  let shortEt = etArr[0];
+  // let etArr = res.data[0].et[0][1].split('{');
+  // let shortEt = etArr[0] || '';
+  let shortEt = 'No source available.';
+  if (res.data[0].et) {
+    let etArr = res.data[0].et[0][1].split('{');
+    shortEt = etArr[0];
+  }
 
   let wordObj = {
     audio: `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subdirectory}/${wordAudio}.mp3`,

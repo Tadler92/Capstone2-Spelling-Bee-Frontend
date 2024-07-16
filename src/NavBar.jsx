@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { Navbar, Nav, NavItem } from 'reactstrap';
-// import { useContext } from "react";
-// import CurrUserContext from "./CurrUserContext";
+import { useContext } from "react";
+import CurrUserContext from "./CurrUserContext";
 import {modalData} from './helpers';
 import './NavBar.css'
 
@@ -9,10 +9,10 @@ import ModalBox from "./ModalBox";
 
 
 const NavBar = ({logout}) => {
-  // const {currentUser} = useContext(CurrUserContext);
-  // let user;
+  const {currentUser} = useContext(CurrUserContext);
+  let user;
 
-  // if (currentUser) user = currentUser.user;
+  if (currentUser) user = currentUser.user;
 
   const howToPlay = modalData.howTo;
   const about = modalData.about;
@@ -70,7 +70,11 @@ const NavBar = ({logout}) => {
             body3={howToPlay.body3}
             body4={howToPlay.body4}
           />
-          {/* {currentUser ?  */}
+          {currentUser && user.isAdmin ? 
+            <NavItem className="mt-2">
+              <NavLink to='/add-new-word'>Add New Word</NavLink>
+            </NavItem> : 
+            null}
 
           {/* {user ? 
             <>

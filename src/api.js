@@ -33,6 +33,12 @@ class SpellingBeeApi {
     return res.word;
   }
 
+  static async addWord(wordData) {
+    let res = await this.request(`words/`, wordData, 'post');
+    console.log('Added word in API', res);
+    return res;
+  }
+
   static async userLogin(loginData) {
     let res = await this.request(`auth/login`, loginData, 'post');
     console.log('getToken API', res);

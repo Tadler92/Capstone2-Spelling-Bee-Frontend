@@ -3,6 +3,8 @@ import { Routes, Route, Navigate, redirect } from "react-router-dom";
 import Home from "./Home";
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
+import NewWordForm from "./NewWordForm";
+import PrivateRoutes from "./PrivateRoutes";
 // import AdminPage from "./AdminPage";
 // import About from './About'
 // import Contact from './Contact'
@@ -10,7 +12,7 @@ import LoginForm from "./LoginForm";
 // import AdminDashboard from "./AdminDashboard";
 
 
-function RoutesList({login, signup}) {
+function RoutesList({login, signup, addWord}) {
   return (
     <Routes>
       {/* <Route path="/about" element={<About />} /> */}
@@ -20,6 +22,10 @@ function RoutesList({login, signup}) {
       <Route path="/" element={<Home />} />
       <Route path="/signup" element={<SignupForm signup={signup} />} />
       <Route path="/login" element={<LoginForm login={login} />} />
+
+      <Route element={<PrivateRoutes />}>
+        <Route path="/add-new-word" element={<NewWordForm addWord={addWord} />} />
+      </Route>
 
       <Route path="*" element={<Navigate to='/' replace />} />
 
