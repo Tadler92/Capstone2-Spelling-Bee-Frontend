@@ -36,7 +36,7 @@ const ModalBox = ({modalName, title, body1, body2, body3, body4, logout=null}) =
         {modalName}
       </Button>
 
-      <Modal isOpen={modal} toggle={toggle} fade={true}>
+      <Modal title={`modal-${modalName}`} isOpen={modal} toggle={toggle} fade={true}>
         <ModalHeader 
           toggle={toggle} 
           className="bg-dark"

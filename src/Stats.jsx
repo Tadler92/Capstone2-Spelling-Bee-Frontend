@@ -24,15 +24,15 @@ const Stats = () => {
 
   return (
     <div>
-      <div>
+      <div title="playedStats">
         <p>{playedWords}</p>
         <p>Played</p>
       </div>
-      <div>
+      <div title="solvedStats">
         <p>{solvedWords}</p>
         <p>Solved</p>
       </div>
-      <div>
+      <div title="pointsStats">
         <p>{totalPoints}</p>
         <p>Points</p>
       </div>

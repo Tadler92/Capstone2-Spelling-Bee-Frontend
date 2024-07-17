@@ -35,7 +35,7 @@ describe('NavBar Tests', () => {
         }
       }
     };
-  })
+  });
 
   // NavBar Smoke Test:
   it('should render', () => {
