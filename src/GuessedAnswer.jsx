@@ -17,7 +17,7 @@ const GuessedAnswer = ({guess, correct}) => {
   return (
     // <div className="GuessedAnswer border border-danger my-3">
     // <div className="GuessedAnswer my-3">
-    <div className={correct ?
+    <div title="GuessBox" className={correct ?
       correctClass['trueText'] :
       correctClass['falseText']
     }>

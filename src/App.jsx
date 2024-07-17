@@ -26,7 +26,7 @@ function App() {
   const [playedWords, setPlayedWords] = useState(0);
   const [solvedWords, setSolvedWords] = useState(0);
 
-  const start = moment('07-09-2024', 'MM-DD-YYYY');
+  const start = moment('07-16-2024', 'MM-DD-YYYY');
   let today = moment();
   let todayWordID = today.diff(start, 'days');
 
@@ -201,7 +201,7 @@ function App() {
       console.log('newWord in APP.JSX', newWord);
 
       return {wordAdded: 'Success'}
-      
+
     } catch (err) {
       console.log('ERROR ADDING WORD', err);
 
