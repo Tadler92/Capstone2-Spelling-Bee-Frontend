@@ -87,7 +87,7 @@ const Home = () => {
     guesses[guessCount]['guess'] = guess;
 
 
-    if (guess === dailyWord.word) {
+    if (guess.toLowerCase() === dailyWord.word) {
       guesses[guessCount]['correctGuess'] = true;
       console.log('current guessCount in Home.jsx', guessCount);
 
@@ -187,7 +187,7 @@ const Home = () => {
       ))} */}
       </div>
 
-      <div hidden={(dailyWord['complete'] || wordAlreadyComplete)}>
+      <div title="guessingDiv" hidden={(dailyWord['complete'] || wordAlreadyComplete)}>
         <div>
           <audio id="audioElement" controls src={`${dailyWordObj.audio}`}>
             Your browser does not support the audio element.
@@ -207,7 +207,7 @@ const Home = () => {
 
       {/* <CountdonwClock duration={duration} /> */}
 
-      <div hidden={(!dailyWord['complete'] && !wordAlreadyComplete)}>
+      <div title="clockDiv" hidden={(!dailyWord['complete'] && !wordAlreadyComplete)}>
         <h2>Time Until Next Word:</h2>
         <h3>
           <Countdown date={tomorrow.format()} daysInHours={true} />
