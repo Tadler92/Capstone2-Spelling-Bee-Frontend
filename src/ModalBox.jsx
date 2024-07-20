@@ -68,12 +68,21 @@ const ModalBox = ({modalName, title, body1, body2, body3, body4, logout=null}) =
 
           {currentUser ? 
             (logout ?
+              <>
+              <Link 
+                  to='/user-rankings' 
+                  className="btn btn-sm btn-success mx-3"
+                  onClick={toggle}
+                >
+                  See Rankings
+                </Link>
               <button 
                 onClick={logout} 
                 className="btn btn-sm btn-danger mx-2"
               >
                 Logout
-              </button> : 
+              </button>
+              </> : 
               null) :
             (body4.includes('sign up') ? 
               <>

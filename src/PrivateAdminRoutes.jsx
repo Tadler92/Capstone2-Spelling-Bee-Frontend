@@ -4,12 +4,12 @@ import CurrUserContext from "./CurrUserContext";
 import { Navigate, Outlet } from "react-router-dom";
 
 
-const PrivateRoutes = () => {
+const PrivateAdminRoutes = () => {
   const {currentUser} = useContext(CurrUserContext);
 
   return (
     <>
-      {currentUser ? 
+      {currentUser && currentUser.user.isAdmin ? 
         <Outlet /> :
         <Navigate to='/' replace />
       }
@@ -18,4 +18,4 @@ const PrivateRoutes = () => {
 };
 
 
-export default PrivateRoutes;
+export default PrivateAdminRoutes;

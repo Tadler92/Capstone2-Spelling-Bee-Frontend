@@ -23,12 +23,12 @@ const NavBar = ({logout}) => {
     <div className="NavBar">
       <Navbar className="navbar navbar-expand-md">
         {/* <NavLink id="NavBar-Home" className='navbar-brand' to='/'>Jobly</NavLink> */}
-        {/* <NavLink className='navbar-brand' to='/'>
+        <NavLink className='navbar-brand text-light py-0' to='/'>
         ✏️ Spelling Bee 🐝
-        </NavLink> */}
-        <h6 className='navbar-brand text-light py-0'>
+        </NavLink>
+        {/* <h6 className='navbar-brand text-light py-0'>
         ✏️ Spelling Bee 🐝
-        </h6>
+        </h6> */}
 
         <Nav className="ml-auto" navbar>
           {/* <Modal>

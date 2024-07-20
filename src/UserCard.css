@@ -1,0 +1,43 @@
+/* .UserCard {
+  margin-top: 30px;
+} */
+
+.UserCard-placement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 220px;
+  /* border: 2px solid red; */
+}
+
+.UserCard-first {
+  background-color: gold;
+  /* color: white; */
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.UserCard-second {
+  background-color: silver;
+  /* color: white; */
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.UserCard-third {
+  background-color: brown;
+  /* color: white; */
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.UserCard-any-place {
+  /* background-color: gray; */
+  border-right: solid 2px black;
+  font-size: 20px;
+  font-weight: bold;
+}

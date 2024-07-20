@@ -52,6 +52,12 @@ class SpellingBeeApi {
     return res.token;
   }
 
+  static async getRankedUsers() {
+    let res = await this.request('users/ranked');
+    console.log('ALL RANKED USERS FROM API', res);
+    return res;
+  }
+
   static async getCurrUser(username) {
     let res = await this.request(`users/${username}`);
     console.log('current user API', res);

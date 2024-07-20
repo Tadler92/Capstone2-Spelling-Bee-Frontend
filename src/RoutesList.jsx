@@ -4,7 +4,9 @@ import Home from "./Home";
 import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 import NewWordForm from "./NewWordForm";
+import PrivateAdminRoutes from "./PrivateAdminRoutes";
 import PrivateRoutes from "./PrivateRoutes";
+import RankedUsers from "./RankedUsers";
 // import AdminPage from "./AdminPage";
 // import About from './About'
 // import Contact from './Contact'
@@ -23,8 +25,11 @@ function RoutesList({login, signup, addWord}) {
       <Route path="/signup" element={<SignupForm signup={signup} />} />
       <Route path="/login" element={<LoginForm login={login} />} />
 
-      <Route element={<PrivateRoutes />}>
+      <Route element={<PrivateAdminRoutes />}>
         <Route path="/add-new-word" element={<NewWordForm addWord={addWord} />} />
+      </Route>
+      <Route element={<PrivateRoutes />}>
+        <Route path="/user-rankings" element={<RankedUsers />} />
       </Route>
 
       <Route path="*" element={<Navigate to='/' replace />} />
