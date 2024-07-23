@@ -7,6 +7,8 @@ import NewWordForm from "./NewWordForm";
 import PrivateAdminRoutes from "./PrivateAdminRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 import RankedUsers from "./RankedUsers";
+import ChallengeOptions from "./ChallengeOptions";
+import ChallengePage from "./ChallengePage";
 // import AdminPage from "./AdminPage";
 // import About from './About'
 // import Contact from './Contact'
@@ -30,6 +32,8 @@ function RoutesList({login, signup, addWord}) {
       </Route>
       <Route element={<PrivateRoutes />}>
         <Route path="/user-rankings" element={<RankedUsers />} />
+        <Route path="/challenges" element={<ChallengeOptions />} />
+        <Route path="/challenges/easy" element={<ChallengePage mode='easy' />} />
       </Route>
 
       <Route path="*" element={<Navigate to='/' replace />} />

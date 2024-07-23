@@ -31,12 +31,12 @@ const ModalBox = ({modalName, title, body1, body2, body3, body4, logout=null}) =
 
   return (
     <>
-      <Button onClick={toggle} color="none" className="text-light">
+      <Button onClick={toggle} color="none" className="link-light link-opacity-25-hover">
         {/* Launch Name of Modal */}
         {modalName}
       </Button>
 
-      <Modal title={`modal-${modalName}`} isOpen={modal} toggle={toggle} fade={true}>
+      <Modal title={`modal-${modalName}`} isOpen={modal} toggle={toggle} fade={true} fullscreen='sm'>
         <ModalHeader 
           toggle={toggle} 
           className="bg-dark"

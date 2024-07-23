@@ -42,7 +42,7 @@ const SpellWordForm = ({compareWords}) => {
               value={formData.guess}
               onChange={handleChange}
               className="p-2"
-              disabled={dailyWord['complete'] ? true : false}
+              // disabled={dailyWord['complete'] ? true : false}
             />
           </FormGroup>
         </Col>
@@ -50,7 +50,7 @@ const SpellWordForm = ({compareWords}) => {
         <Col sm={12}>
           <Button 
             className="p-2 bg-success"
-            disabled={dailyWord['complete'] ? true : false}
+            // disabled={dailyWord['complete'] ? true : false}
           >
             Submit
           </Button>

@@ -11,7 +11,7 @@ const PrivateRoutes = () => {
     <>
       {currentUser ? 
         <Outlet /> :
-        <Navigate to='/' replace />
+        <Navigate to='/signup' replace />
       }
     </>
   )

@@ -61,6 +61,7 @@ const Home = () => {
   // const [dailyWordObj, setDailyWordObj] = useState({});
   const [guesses, setGuesses] = useState(INITIAL_STATE);
   const [guessCount, setGuessCount] = useState(0);
+  const [userSolved, setUserSolved] = useState(false);
 
   let user;
 
@@ -124,20 +125,37 @@ const Home = () => {
 
       // guesses[guessCount]['correctGuess'] ? 
       if (currentUser) {
-      const userWord = (guesses[guessCount]['correctGuess'] ? (
-        await SpellingBeeApi.addWordToUser(user.username, todayWordID, {
-          completed: true,
-          solved: true
-        })
-        // updateStats(true, true, (user.points || 10))) : (
-        ) : (
-        await SpellingBeeApi.addWordToUser(user.username, todayWordID, {
-          completed: true,
-          solved: false
-        })),
-        updateStats(true, false, 0));
+        if (guesses[guessCount]['correctGuess']) {
+          const userWord = await SpellingBeeApi.addWordToUser(user.username, todayWordID, {
+            completed: true,
+            solved: true
+          });
+          console.log('checking CORRECT userWord in Home.jsx', userWord);
+          setUserSolved(userWord.wordCompletion.solved)
+        }
+        else {
+          const userWord = await SpellingBeeApi.addWordToUser(user.username, todayWordID, {
+            completed: true,
+            solved: false
+          });
+          updateStats(true, false, 0);
+          console.log('checking INCORRECT userWord in Home.jsx', userWord);
+        }
+      
+      // const userWord = (guesses[guessCount]['correctGuess'] ? (
+      //   await SpellingBeeApi.addWordToUser(user.username, todayWordID, {
+      //     completed: true,
+      //     solved: true
+      //   })
+      //   // updateStats(true, true, (user.points || 10))) : (
+      //   ) : (
+      //   await SpellingBeeApi.addWordToUser(user.username, todayWordID, {
+      //     completed: true,
+      //     solved: false
+      //   })),
+      //   updateStats(true, false, 0));
 
-        console.log('checking userWord in Home.jsx', userWord);
+      //   console.log('checking userWord in Home.jsx', userWord);
       } else {
         if (!guesses[guessCount]['correctGuess']) updateStats(true, false, 0);
       }
@@ -208,10 +226,20 @@ const Home = () => {
       {/* <CountdonwClock duration={duration} /> */}
 
       <div title="clockDiv" hidden={(!dailyWord['complete'] && !wordAlreadyComplete)}>
-        <h2>Time Until Next Word:</h2>
+        {userSolved ? 
+          <h2>Congrats, you correctly spelled today's word!</h2> : 
+          <>
+            <h2>The correct spelling of today's word is:</h2>
+            <h3 className="text-warning">{dailyWord.word}</h3>
+          </>}
+        <h2 className="mt-5">Time Until Next Word:</h2>
         <h3>
           <Countdown date={tomorrow.format()} daysInHours={true} />
         </h3>
+        <h5 className="mt-5 mb-3">
+          Want more spelling fun? Click below to try out our challenges!
+        </h5>
+        <Link to='/challenges' className="btn btn-md px-5 mx-3 btn-warning">Spelling Challenges</Link>
       </div>
     </div>
   )

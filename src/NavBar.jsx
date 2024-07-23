@@ -23,9 +23,14 @@ const NavBar = ({logout}) => {
     <div className="NavBar">
       <Navbar className="navbar navbar-expand-md">
         {/* <NavLink id="NavBar-Home" className='navbar-brand' to='/'>Jobly</NavLink> */}
-        <NavLink className='navbar-brand text-light py-0' to='/'>
-        ✏️ Spelling Bee 🐝
+        <div>
+        <h4 className="d-inline mx-2">✏️</h4>
+        <NavLink className='navbar-brand text-light link-opacity-25-hover py-0' to='/'>
+        {/* ✏️ Spelling Bee 🐝 */}
+         Spelling Bee
         </NavLink>
+        <h4 className="d-inline">🐝</h4>
+        </div>
         {/* <h6 className='navbar-brand text-light py-0'>
         ✏️ Spelling Bee 🐝
         </h6> */}
@@ -70,6 +75,11 @@ const NavBar = ({logout}) => {
             body3={howToPlay.body3}
             body4={howToPlay.body4}
           />
+          {currentUser ? 
+            <NavItem className="mt-2 link-opacity-25-hover">
+              <NavLink to='/challenges'>Challenges</NavLink>
+            </NavItem> : 
+            null}
           {currentUser && user.isAdmin ? 
             <NavItem className="mt-2">
               <NavLink to='/add-new-word'>Add New Word</NavLink>

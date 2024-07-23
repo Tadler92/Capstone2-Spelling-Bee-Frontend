@@ -5,7 +5,7 @@ import collegiateDictKey from "./secret";
 async function getDictWord(word) {
   let res = await axios.get(`https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${collegiateDictKey}`);
 
-  // console.log('Res from requestin Dict.com', res)
+  console.log('Res from requestin Dict.com', res)
   // console.log('Res from requestin Dict.com', res.data)
   // console.log('Res from requestin Dict.com', res.data[0])
   // console.log('ETYMOLOGY from requestin Dict.com', res.data[0].et)
@@ -72,5 +72,32 @@ const modalData = {
   },
 }
 
+// function randomIntArray(min, max, n=10) {
+function randomIntArray(mode) {
+  let intSet = new Set();
+  let intArr = [];
+  let min = 1;
+  let max = 11;
+  let n;
 
-export {getDictWord, modalData};
+  if (mode === 'easy') n = 10;
+  else if (mode === 'medium') n = 20;
+  else n = 30;
+
+  while (intSet.size < n) {
+    intSet.add(Math.floor(Math.random() * (max - min + 1)) + min)
+  }
+
+  // console.log('MY RETURNING intSet', intSet);
+  intSet.forEach(v => intArr.push(v));
+  // console.log('ARRAY OF intSet', Array.from(intSet));
+  // return intSet;
+  return intArr;
+}
+// if keeping as a set, I can make an iterator variable, like:
+// ******* const iterator = intSet.values()  **********
+// then to get each of the values, I just have to run the following:
+// ******* iterator.next().value  **********
+
+
+export {getDictWord, modalData, randomIntArray};
