@@ -80,7 +80,10 @@ const ChallengePage = ({mode}) => {
   console.log('Challenge Word Object in ChallengePage.jsx', challengeWordObj);
 
   const checkGuess = async (guess) => {
-    guesses[guessCount] = {guess};
+    guesses[guessCount] = {
+      id: (guessCount + 1),
+      guess
+    };
 
 
     if (guess.toLowerCase() === challengeWord.word) {
@@ -92,7 +95,9 @@ const ChallengePage = ({mode}) => {
         setStopTimer(true);
       }
       else {
-        guesses.push({id: (guessCount + 2), correctGuess: null})
+        // guesses.push({id: (guessCount + 2), correctGuess: null})
+        setGuesses(guesses => ([...guesses, {id: (guessCount + 2), correctGuess: null}]))
+        // console.log('!!!!!!guesses when adding a new guessBOX', guesses);
       // console.log('current guessCount in Home.jsx', guessCount);
 
       // if (user) {
