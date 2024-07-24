@@ -81,7 +81,7 @@ const NavBar = ({logout}) => {
             </NavItem> : 
             null}
           {currentUser && user.isAdmin ? 
-            <NavItem className="mt-2">
+            <NavItem className="mt-2 mx-3">
               <NavLink to='/add-new-word'>Add New Word</NavLink>
             </NavItem> : 
             null}

@@ -34,6 +34,8 @@ function RoutesList({login, signup, addWord}) {
         <Route path="/user-rankings" element={<RankedUsers />} />
         <Route path="/challenges" element={<ChallengeOptions />} />
         <Route path="/challenges/easy" element={<ChallengePage mode='easy' />} />
+        <Route path="/challenges/medium" element={<ChallengePage mode='medium' />} />
+        <Route path="/challenges/hard" element={<ChallengePage mode='hard' />} />
       </Route>
 
       <Route path="*" element={<Navigate to='/' replace />} />

@@ -77,7 +77,7 @@ function randomIntArray(mode) {
   let intSet = new Set();
   let intArr = [];
   let min = 1;
-  let max = 11;
+  let max = 43;
   let n;
 
   if (mode === 'easy') n = 10;
