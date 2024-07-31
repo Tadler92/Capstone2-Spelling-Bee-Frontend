@@ -44,6 +44,9 @@ const LoginForm = ({login}) => {
       <p className="bg-danger h5 py-2" hidden={errMsg ? false : true}>{errMsg}</p>
 
       <h1>Login</h1>
+      <p>
+        Don't have an account yet? <Link to='/signup'>Sign Up</Link>
+      </p>
       <Form className="LoginForm-form mb-3" onSubmit={handleSubmit}>
 
         <InputGroup className="LoginForm-label">

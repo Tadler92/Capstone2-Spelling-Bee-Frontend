@@ -38,6 +38,7 @@ function RoutesList({login, signup, addWord}) {
         <Route path="/challenges/hard" element={<ChallengePage mode='hard' />} />
       </Route>
 
+      {/* <Route path="/*" element={<Navigate to='/login' replace />} /> */}
       <Route path="*" element={<Navigate to='/' replace />} />
 
       {/* Below is the more common way of redirecting to not found urls (aka 404s) */}

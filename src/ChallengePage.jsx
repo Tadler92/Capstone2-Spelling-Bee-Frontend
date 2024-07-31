@@ -21,6 +21,7 @@ const ChallengePage = ({mode}) => {
   } = useContext(CurrUserContext);
   const [challengeWord, setChallengeWord] = useState({});
   const [challengeWordObj, setChallengeWordObj] = useState({});
+  const [challengeStarted, setChallengeStarted] = useState(false);
   const [challengeComplete, setChallengeComplete] = useState(false);
   const [guesses, setGuesses] = useState([{id: 1, correctGuess: null}]);
   const [challengeGuess, setChallengeGuess] = useState('');
@@ -182,6 +183,10 @@ const ChallengePage = ({mode}) => {
     // console.log('guessCount in checkGuess', guessCount);
   }
 
+  const startChallenge = () => {
+    setChallengeStarted(true);
+  }
+
   const checkClock = (timer) => {
     let timerEx = `00:00`
     // let timerEx = `00:
@@ -209,7 +214,44 @@ const ChallengePage = ({mode}) => {
         ))}
       </div>
 
-      <div title="clockDiv" className="ChallengePage-clock my-4">
+      {!challengeStarted ?
+        <div className="ChallengePage-startDiv my-4">
+          <p>To begin the challenge, click the button below.  When you do so, you'll be given your first word to spell, and your timer will start.</p>
+          <button className="btn btn-primary" onClick={startChallenge}>
+            Start Challenge
+          </button>
+        </div> : 
+        <>
+          <div title="clockDiv" className="ChallengePage-clock my-4">
+            <CountdonwClock 
+              checkClock={checkClock} 
+              modeTimer={mode}
+              stopCountdown={stopClock}
+              checkStopCountdown={stopTimer}
+            />
+          </div>
+
+          <div title="guessingDiv" hidden={incorrectGuess || clockAtZero || challengeComplete}>
+            <h3>Word #{guessCount + 1}</h3>
+            <div>
+              <audio id="audioElement" controls src={`${challengeWordObj.audio}`}>
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+
+            <div>
+              <Hints 
+                definition={challengeWordObj.definition} 
+                partOfSpeach={challengeWordObj.partOfSpeech}
+                etymology={challengeWordObj.etymology}
+              />
+            </div>
+
+            <SpellWordForm compareWords={checkGuess} />
+          </div>
+        </>}
+
+      {/* <div title="clockDiv" className="ChallengePage-clock my-4">
         <CountdonwClock 
           checkClock={checkClock} 
           modeTimer={mode}
@@ -235,7 +277,7 @@ const ChallengePage = ({mode}) => {
         </div>
 
         <SpellWordForm compareWords={checkGuess} />
-      </div>
+      </div> */}
 
       <div className="ChallengePage-failPass my-5" hidden={!(incorrectGuess || clockAtZero || challengeComplete)}>
         {challengeComplete ? 
@@ -244,7 +286,9 @@ const ChallengePage = ({mode}) => {
           </h5> :
           // null
           <h5 className="text-danger">
-            Oh, no! You only got {guessCount} out of {idxArray.length} guesses correct. You've failed the Spelling Bee Challenge... That's okay though, you can try this mode again, or try one of our other modes.
+            Oh, no! You only got {guessCount} out of {idxArray.length} guesses correct. You've failed the Spelling Bee Challenge; the correct spelling was 
+            <span className="d-block display-4">"{challengeWord.word}"</span>
+            That's okay though, you can try this mode again, or try one of our other modes.
           </h5>
         }
         {/* {incorrectGuess || clockAtZero ? 
